@@ -399,21 +399,7 @@ function wrapfunction (fn, message) {
     throw new TypeError('argument fn must be a function')
   }
 
-  var args = createArgumentsString(fn.length)
-  var deprecate = this // eslint-disable-line no-unused-vars
-  var stack = getStack()
-  var site = callSiteLocation(stack[1])
-
-  site.name = fn.name
-
-   // eslint-disable-next-line no-eval
-  var deprecatedfn = eval('(function (' + args + ') {\n' +
-    '"use strict"\n' +
-    'log.call(deprecate, message, site)\n' +
-    'return fn.apply(this, arguments)\n' +
-    '})')
-
-  return deprecatedfn
+  return fn
 }
 
 /**
